@@ -452,6 +452,7 @@ impl MappableCommand {
         yank_joined, "Join and yank selections",
         yank_joined_to_clipboard, "Join and yank selections to clipboard",
         yank_main_selection_to_clipboard, "Yank main selection to clipboard",
+        yank_abs_filename_to_clipboard, "Yank absolute filename to clipboard",
         yank_joined_to_primary_clipboard, "Join and yank selections to primary clipboard",
         yank_main_selection_to_primary_clipboard, "Yank main selection to primary clipboard",
         replace_with_yanked, "Replace with yanked text",
@@ -4188,6 +4189,22 @@ fn yank(cx: &mut Context) {
 fn yank_to_clipboard(cx: &mut Context) {
     yank_impl(cx.editor, '+');
     exit_select_mode(cx);
+}
+
+fn yank_abs_filename_to_clipboard(cx: &mut Context) {
+    if let Some(path) = current!(cx.editor).1.path() {
+        if let Err(err) = cx
+            .editor
+            .registers
+            .write('+', vec![path.to_string_lossy().into_owned()])
+        {
+            cx.editor.set_error(err.to_string());
+        } else {
+            cx.editor.set_status("yanked filename to clipboard");
+        }
+    } else {
+        cx.editor.set_error("No file path available");
+    }
 }
 
 fn yank_to_primary_clipboard(cx: &mut Context) {
