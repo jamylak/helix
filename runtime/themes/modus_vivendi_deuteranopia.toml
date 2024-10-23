@@ -10,9 +10,10 @@ inherits = "modus_vivendi"
 "function" = "magenta"
 "tag" = "magenta"
 
-"ui.cursor" = { fg = "#d0ff00", bg = "blue-intense" }
+"ui.cursor" = { fg = "#d0ff00", bg = "#ffae00" }
 "ui.cursor.primary.normal" = { fg = "bg-main", bg = "#d0ff00" }
-"ui.selection.primary" = { bg = "#0059ff", fg="#FFFFFF"}                                                     # primary selection in the editing area
+"ui.selection" = { bg = "#4a89ff", fg="#FFFFFF"}
+"ui.selection.primary" = { bg = "#0059ff", fg="#FFFFFF"}
 
 "diagnostic.error" = { underline = { color = "yellow-intense", style = "curl" } }
 "diagnostic.warning" = { underline = { color = "magenta-faint", style = "curl" } }
